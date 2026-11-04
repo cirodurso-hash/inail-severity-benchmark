@@ -1,9 +1,15 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the article and this software."
+type: software
 title: "inail-severity-benchmark: code for 'Using Italian open data and machine learning to characterise regional patterns in workplace accident outcomes'"
 authors:
   - family-names: "D'Urso"
     given-names: "Ciro"
 version: 1.0.0
 license: MIT
-date-released: 2026-11-10
+repository-code: "https://github.com/cirodurso-hash/inail-severity-benchmark"
+keywords:
+  - occupational injuries
+  - INAIL open data
+  - machine learning
+  - injury severity
