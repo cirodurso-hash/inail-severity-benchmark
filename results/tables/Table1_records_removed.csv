@@ -1,0 +1,9 @@
+label,North-West,North-East,Center,South
+Economic sector = ND (missing),238033,283006,159218,193048
+Age = -1 / under 15,14,18,15,14
+Place of occurrence = ND/NaN,0,0,1,0
+Non-indemnified claim (NE),176366,182406,106085,105201
+Commuting accident (in itinere),77446,63622,52369,35235
+Employer insurance position (PAT) = -1,0,0,0,0
+Original records,920662,940296,578479,584255
+Retained (final),428803,411244,260791,250757

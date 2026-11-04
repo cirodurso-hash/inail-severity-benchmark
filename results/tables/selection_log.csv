@@ -1,0 +1,37 @@
+region,step,label,removed,remaining
+North-West,raw,Original records,0,920662
+North-West,sector_missing,Economic sector = ND (missing),238033,682629
+North-West,ateco_missing,Economic sector = ND (missing),0,682629
+North-West,age_missing,Age = -1 / under 15,3,682626
+North-West,place_missing,Place of occurrence = ND/NaN,0,682626
+North-West,not_indemnified,Non-indemnified claim (NE),176366,506260
+North-West,commuting,Commuting accident (in itinere),77446,428814
+North-West,pat_missing,Employer insurance position (PAT) = -1,0,428814
+North-West,age_under15,Age = -1 / under 15,11,428803
+North-East,raw,Original records,0,940296
+North-East,sector_missing,Economic sector = ND (missing),283006,657290
+North-East,ateco_missing,Economic sector = ND (missing),0,657290
+North-East,age_missing,Age = -1 / under 15,6,657284
+North-East,place_missing,Place of occurrence = ND/NaN,0,657284
+North-East,not_indemnified,Non-indemnified claim (NE),182406,474878
+North-East,commuting,Commuting accident (in itinere),63622,411256
+North-East,pat_missing,Employer insurance position (PAT) = -1,0,411256
+North-East,age_under15,Age = -1 / under 15,12,411244
+Center,raw,Original records,0,578479
+Center,sector_missing,Economic sector = ND (missing),159218,419261
+Center,ateco_missing,Economic sector = ND (missing),0,419261
+Center,age_missing,Age = -1 / under 15,1,419260
+Center,place_missing,Place of occurrence = ND/NaN,1,419259
+Center,not_indemnified,Non-indemnified claim (NE),106085,313174
+Center,commuting,Commuting accident (in itinere),52369,260805
+Center,pat_missing,Employer insurance position (PAT) = -1,0,260805
+Center,age_under15,Age = -1 / under 15,14,260791
+South,raw,Original records,0,584255
+South,sector_missing,Economic sector = ND (missing),193048,391207
+South,ateco_missing,Economic sector = ND (missing),0,391207
+South,age_missing,Age = -1 / under 15,2,391205
+South,place_missing,Place of occurrence = ND/NaN,0,391205
+South,not_indemnified,Non-indemnified claim (NE),105201,286004
+South,commuting,Commuting accident (in itinere),35235,250769
+South,pat_missing,Employer insurance position (PAT) = -1,0,250769
+South,age_under15,Age = -1 / under 15,12,250757

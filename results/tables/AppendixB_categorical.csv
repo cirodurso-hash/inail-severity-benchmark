@@ -1,0 +1,13 @@
+variable,region,count,unique,top,freq,pct
+Gender,North-West,428803,2,M,265427,61.9
+Gender,North-East,411244,2,M,277593,67.5
+Gender,Center,260791,2,M,172402,66.11
+Gender,South,250757,2,M,178789,71.3
+Large Tariff Group (INAIL),North-West,428803,11,0,231808,54.06
+Large Tariff Group (INAIL),North-East,411244,11,0,180370,43.86
+Large Tariff Group (INAIL),Center,260791,11,0,142289,54.56
+Large Tariff Group (INAIL),South,250757,11,0,148433,59.19
+Economic Activity (ATECO),North-West,428803,21,Q,130984,30.55
+Economic Activity (ATECO),North-East,411244,21,C,120248,29.24
+Economic Activity (ATECO),Center,260791,21,Q,56993,21.85
+Economic Activity (ATECO),South,250757,21,Q,64639,25.78

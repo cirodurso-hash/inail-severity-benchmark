@@ -1,0 +1,50 @@
+# Configuration of the analysis pipeline.
+# All paths are relative to the repository root unless absolute.
+
+data_dir: data/raw            # folder containing the four INAIL CSV files
+output_dir: outputs           # all results are written here
+
+# INAIL open-data files (one per macro-region), as downloaded from
+# https://dati.inail.it/portale/it/dataset/infortuni-sul-lavoro.html
+files:
+  North-West: NordOvestAT.csv
+  North-East: NordEstAT.csv
+  Center: CentroAT.csv
+  South: SudAT.csv
+csv:
+  sep: ";"
+  encoding: utf-8
+
+# Record selection. The Large Tariff Group (GGT) is not used by the models, so records with an
+# undetermined GGT are kept (false); set to true to reproduce the earlier sample (sensitivity S6).
+selection:
+  exclude_missing_ggt: false
+
+# Random seeds (fixed for reproducibility)
+seeds:
+  split: 42                   # train/validation/test split and model seeds
+  metric_bootstrap: 2026      # bootstrap of test-set metrics (Tables 4 and S8, S9)
+  coef_bootstrap: 2027        # cluster bootstrap of the logit coefficients (S7)
+  tuning: 2028                # random search of hyperparameters (S8)
+
+split:
+  test_size: 0.20             # held-out test set
+  val_size: 0.25              # share of the remaining 80% used for validation (= 20% of total)
+
+bootstrap:
+  metric_B: 1000              # resamples of the test set for macro-F1, balanced accuracy, accuracy
+  auc_B: 300                  # resamples for AUC
+  coef_B: 200                 # cluster (worker-level) bootstrap replicates of the multinomial logit
+
+tuning:
+  n_iter: 20                  # configurations sampled per model (same budget for every model)
+
+stability:
+  n_runs: 20                  # repeated hold-out runs for SHAP stability
+
+chronological:
+  train_years: [2020, 2021, 2022]
+  val_years: [2023]
+  test_years: [2024]
+
+n_jobs: 2                     # threads used by XGBoost, CatBoost and the random forest

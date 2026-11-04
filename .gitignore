@@ -1,0 +1,10 @@
+outputs/
+data/raw/*.csv
+data/raw/*.zip
+tests/out/
+tests/synthetic/
+catboost_info/
+__pycache__/
+*.pkl
+.venv/
+.idea/

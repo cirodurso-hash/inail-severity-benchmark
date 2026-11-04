@@ -1,0 +1,16 @@
+{
+ "python": "3.13.18",
+ "platform": "Linux-6.18.44-fc-v230-x86_64-with-glibc2.39",
+ "numpy": "2.5.3",
+ "pandas": "3.0.5",
+ "scipy": "1.18.1",
+ "sklearn": "1.9.1",
+ "imblearn": "0.14.2",
+ "xgboost": "3.4.1",
+ "catboost": "1.2.10",
+ "statsmodels": "0.15.0",
+ "shap": "0.54.1",
+ "matplotlib": "3.11.2",
+ "openpyxl": "3.1.5",
+ "joblib": "1.6.0"
+}

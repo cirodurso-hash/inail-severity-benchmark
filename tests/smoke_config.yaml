@@ -1,0 +1,13 @@
+# Fast configuration for the smoke test on synthetic data (python tests/smoke_test.py)
+data_dir: tests/synthetic
+output_dir: tests/out
+files: {North-West: NordOvestAT.csv, North-East: NordEstAT.csv, Center: CentroAT.csv, South: SudAT.csv}
+csv: {sep: ";", encoding: utf-8}
+seeds: {split: 42, metric_bootstrap: 2026, coef_bootstrap: 2027, tuning: 2028}
+split: {test_size: 0.20, val_size: 0.25}
+bootstrap: {metric_B: 50, auc_B: 20, coef_B: 6}
+tuning: {n_iter: 2}
+stability: {n_runs: 2}
+chronological: {train_years: [2020, 2021, 2022], val_years: [2023], test_years: [2024]}
+n_jobs: 2
+selection: {exclude_missing_ggt: false}

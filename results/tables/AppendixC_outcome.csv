@@ -1,0 +1,5 @@
+variable,region,count,unique,top,freq,pct
+Compensation,North-West,428803,4,TE,404175,94.26
+Compensation,North-East,411244,4,TE,387959,94.34
+Compensation,Center,260791,4,TE,238570,91.48
+Compensation,South,250757,4,TE,223134,88.98
