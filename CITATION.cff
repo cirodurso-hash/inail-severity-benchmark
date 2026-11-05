@@ -5,7 +5,7 @@ title: "inail-severity-benchmark: code for 'Using Italian open data and machine 
 authors:
   - family-names: "D'Urso"
     given-names: "Ciro"
-version: 1.0.0
+version: 1.1.0
 license: MIT
 repository-code: "https://github.com/cirodurso-hash/inail-severity-benchmark"
 keywords:

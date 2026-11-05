@@ -27,6 +27,8 @@ def make(n, seed):
                            PosizioneAssicurativaTerritoriale=rng.integers(1, 10**6, n).astype(str),
                            IdentificativoInfortunato=worker.astype(str)))
     nd = rng.random(n) < 0.25; df.loc[nd, ["SettoreAttivitaEconomica", "CodiceAteco"]] = "ND"
+    gest = np.full(n, "I", dtype=object); other = nd & (rng.random(n) < 0.6)    # Agriculture / State: no sector
+    gest[other] = rng.choice(["A", "S"], int(other.sum())); df["Gestione"] = gest
     df.loc[rng.random(n) < 0.04, "GrandeGruppoTariffario"] = "ND"
     df.loc[rng.random(n) < 0.0005, "Eta"] = "-1"
     return df

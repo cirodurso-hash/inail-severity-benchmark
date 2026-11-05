@@ -13,18 +13,20 @@ OUTCOMES = ["TE", "CA", "RD", "RS"]
 
 # (key, label used in Table 1, function returning the rows to KEEP)
 FILTERS = [
-    ("sector_missing", "Economic sector = ND (missing)", lambda d: d.SettoreAttivitaEconomica != "ND"),
-    ("ateco_missing", "Economic sector = ND (missing)", lambda d: d.CodiceAteco != "ND"),
+    ("scope_management", "Agriculture or State insurance management (no economic sector)",
+     lambda d: ~d.Gestione.isin(["A", "S"])),
+    ("sector_missing", "Economic sector = ND, Industry and Services management", lambda d: d.SettoreAttivitaEconomica != "ND"),
+    ("ateco_missing", "Economic sector = ND, Industry and Services management", lambda d: d.CodiceAteco != "ND"),
     ("ggt_missing", "Large Tariff Group = ND", lambda d: d.GrandeGruppoTariffario != "ND"),
-    ("age_missing", "Age = -1 / under 15", lambda d: d.Eta != "-1"),
+    ("age_missing", "Invalid age (-1)", lambda d: d.Eta != "-1"),
     ("place_missing", "Place of occurrence = ND/NaN", lambda d: (d.LuogoAccadimento != "") & (d.LuogoAccadimento != "ND")),
     ("not_indemnified", "Non-indemnified claim (NE)", lambda d: d.Indennizzo != "NE"),
     ("commuting", "Commuting accident (in itinere)", lambda d: d.ModalitaAccadimento != "S"),
     ("pat_missing", "Employer insurance position (PAT) = -1", lambda d: d.PosizioneAssicurativaTerritoriale != "-1"),
-    ("age_under15", "Age = -1 / under 15", lambda d: d.Eta.astype(int) >= 15),
+    ("age_under15", "Age under 15", lambda d: d.Eta.astype(int) >= 15),
 ]
 
-REQUIRED = ["DataAccadimento", "Genere", "Eta", "CodiceAteco", "SettoreAttivitaEconomica",
+REQUIRED = ["DataAccadimento", "Genere", "Eta", "CodiceAteco", "SettoreAttivitaEconomica", "Gestione",
             "GrandeGruppoTariffario", "LuogoAccadimento", "Indennizzo", "ModalitaAccadimento",
             "PosizioneAssicurativaTerritoriale", "IdentificativoInfortunato"]
 
@@ -108,7 +110,7 @@ def prepare(cfg, regions):
         print(f"[prepare] {r}: {len(d):,} records retained", flush=True)
     log = pd.DataFrame(rows)
     log.to_csv(os.path.join(od, "selection_log.csv"), index=False)
-    # Table 1: records removed by reason (sector and ATECO missing merged; the two age filters merged)
+    # Table 1: records removed by reason, in the order in which the filters are applied
     t1 = log[log.step != "raw"].groupby(["label", "region"], sort=False).removed.sum().unstack("region")[regions]
     raw = log[log.step == "raw"].set_index("region").remaining[regions]
     fin = log.groupby("region").remaining.last()[regions]
@@ -126,13 +128,37 @@ def load_clean(cfg, region):
 
 
 def selection_stages(cfg, regions):
-    """Supplementary Table S5: characteristics of records removed at each selection stage."""
+    """Supplementary Table S5: characteristics of records removed at each selection stage, and of the
+    otherwise eligible records lost because the economic sector is missing (last row)."""
     rows = []
     for r in regions:
         _, log = load_region(cfg, r, profile=True)
         for e in log:
             rows.append(dict(region=r, **e))
         print(f"[selection] {r} done", flush=True)
+        rows.append(dict(region=r, **_in_scope_missing_sector(cfg, r)))
     t = pd.DataFrame(rows)
     t.to_csv(os.path.join(out_dir(cfg, "supplementary"), "S5_selection_stages.csv"), index=False)
     return t
+
+
+def _in_scope_missing_sector(cfg, region):
+    """Records of the Industry and Services management lost only because the economic sector is
+    missing: they would pass all the other filters. Compared with the analysed records."""
+    skip = default_skip(cfg)
+    df = read_raw(cfg, region)
+    keep = {k: f for k, _, f in FILTERS}
+    df = df[keep["scope_management"](df)]
+    cand = df[~keep["sector_missing"](df)]
+    for k, _, f in FILTERS:
+        if k in ("scope_management", "sector_missing", "ateco_missing") or k in skip:
+            continue
+        cand = cand[f(cand)]
+    final, _ = load_region(cfg, region)
+    final = final.assign(Eta=final.Eta.astype(str), DataAccadimento=final.DataAccadimento)
+    entry = dict(step="sector_missing_in_scope",
+                 label="Economic sector = ND, Industry and Services, otherwise eligible (not a separate filter)",
+                 removed=len(cand), remaining=len(final))
+    entry.update({f"removed_{k}": v for k, v in _profile(cand).items()})
+    entry.update({f"retained_{k}": v for k, v in _profile(final).items()})
+    return entry

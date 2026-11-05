@@ -115,3 +115,13 @@ last decimal with other library versions or numbers of threads.
 ## Licence
 
 Code: MIT (see `LICENSE`). Data: INAIL open data, CC BY 4.0.
+
+## Version history
+
+- **1.1.0** (November 2026). Table 1 separates the claims of the Agriculture and State insurance
+  managements (excluded by design, no economic sector) from the claims of the Industry and Services
+  management with a missing economic sector, and the removal of invalid ages from that of workers
+  under 15; Supplementary Table S5 adds the profile of the otherwise eligible records lost because
+  the economic sector is missing; Figure 5 no longer shows minor axis labels in scientific notation.
+  The analysed records and all estimates are unchanged.
+- **1.0.0** (November 2026). Version used for the first revision of the article.

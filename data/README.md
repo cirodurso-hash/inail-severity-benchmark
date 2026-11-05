@@ -32,6 +32,6 @@ Create the subfolder `data/raw/` and place the four files there (unzip them firs
 were downloaded as an archive), or set `data_dir` in `config.yaml` to the folder that
 contains them.
 
-Columns used: DataAccadimento, Genere, Eta, CodiceAteco, SettoreAttivitaEconomica,
+Columns used: DataAccadimento, Genere, Eta, CodiceAteco, SettoreAttivitaEconomica, Gestione,
 GrandeGruppoTariffario, LuogoAccadimento, Indennizzo, ModalitaAccadimento,
 PosizioneAssicurativaTerritoriale, IdentificativoInfortunato.

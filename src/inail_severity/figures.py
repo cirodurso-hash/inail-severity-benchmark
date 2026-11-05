@@ -58,13 +58,13 @@ def fig_forest(cfg, regions):
                     markeredgecolor="white", markeredgewidth=0.6)
     ax.axvline(1, color=MUTE, lw=1, ls="--"); ax.set_xscale("log")
     ax.set_xticks([0.2, 0.3, 0.5, 1, 2, 3]); ax.set_xticklabels(["0.2", "0.3", "0.5", "1", "2", "3"])
+    ax.xaxis.set_minor_locator(matplotlib.ticker.NullLocator())  # no minor labels in scientific notation
     ax.set_yticks(np.arange(len(order))[::-1], [LAB[v] for v in order])
     ax.set_xlabel("Odds ratio for a more severe outcome (log scale, 95% CI)")
     ax.grid(axis="x", color=GRID, lw=0.8); ax.set_axisbelow(True)
     for s in ["top", "right"]:
         ax.spines[s].set_visible(False)
-    ax.legend(loc="upper center", bbox_to_anchor=(0.4, 1.06), ncol=4, frameon=False, fontsize=9)
-    ax.set_title("Ordinal logit (TE < CA < RD < RS); sector reference: G Trade", fontsize=10, color=INK, pad=26)
+    ax.legend(loc="lower center", bbox_to_anchor=(0.4, 1.0), ncol=4, frameon=False, fontsize=9)
     fig.tight_layout(); fig.savefig(os.path.join(out_dir(cfg, "figures"), "Figure5_forest_ordinal.png"), dpi=300); plt.close(fig)
 
 

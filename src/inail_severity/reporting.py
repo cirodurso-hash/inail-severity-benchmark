@@ -129,7 +129,7 @@ def build(cfg, regions):
         s5 = pd.read_csv(p)
         keep = ["region", "step", "label", "removed", "remaining"] + [c for c in s5.columns if c.startswith(("removed_", "retained_")) and not c.endswith("_n")]
         sheets["S5 Selection stages"] = s5[keep].round(2)
-        notes.append("S5: characteristics of the records removed at each selection stage (applied sequentially) and of those retained after it: share of men, mean age, outcome distribution (including non-indemnified claims, NE) and year of the accident.")
+        notes.append("S5: characteristics of the records removed at each selection stage (applied sequentially) and of those retained after it: share of men, mean age, outcome distribution (including non-indemnified claims, NE) and year of the accident. The last row of each macro-region describes the records of the Industry and Services management that have no economic sector but would have met all the other selection criteria, compared with the analysed records.")
     p = os.path.join(sdir, "S6_ggt_sensitivity.csv")
     if os.path.exists(p):
         s6 = pd.read_csv(p); pr = pd.read_csv(os.path.join(sdir, "S6_ggt_profiles.csv"))
